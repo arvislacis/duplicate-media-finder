@@ -11,7 +11,7 @@ A PHP-based system for detecting duplicate images and videos on remote drives. T
 - **File Size Filter**: Only processes files larger than specified file size
 - **Path Exclusions**: Configure paths to ignore during scanning
 - **Clickable Links**: Results include clickable links to open files in native OS viewers
-- **Bootstrap Frontend**: Clean, responsive web interface
+- **Bootstrap Frontend**: Clean, responsive web interface with dark mode toggle
 - **Statistics**: Detailed scan statistics and space usage analysis
 
 ## Requirements
@@ -142,7 +142,7 @@ Edit `app_config.php` to customize which applications open image and video files
 ```
 
 ### Styling
-The frontend uses Bootstrap 5 via CDN. Custom styles can be added to the `<style>` section in `frontend.html`.
+The frontend uses Bootstrap 5 via CDN with support for both light and dark modes. A toggle button in the top-right corner allows switching between themes, with preferences saved locally. Custom styles can be added to the `<style>` section in `frontend.html`.
 
 ## Security Considerations
 

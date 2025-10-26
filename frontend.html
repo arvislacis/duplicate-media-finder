@@ -6,12 +6,30 @@
     <title>Duplicate Media Finder</title>
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <style>
+        :root {
+            --file-link-color: #0066cc;
+            --duplicate-group-border: #007bff;
+            --size-duplicate-group-border: #ffc107;
+            --stats-card-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --file-path-color: #666;
+            --group-header-bg: #f8f9fa;
+        }
+
+        [data-bs-theme="dark"] {
+            --file-link-color: #4dabf7;
+            --duplicate-group-border: #0d6efd;
+            --size-duplicate-group-border: #fd7e14;
+            --stats-card-bg: linear-gradient(135deg, #495057 0%, #343a40 100%);
+            --file-path-color: #adb5bd;
+            --group-header-bg: #495057;
+        }
+
         .file-link {
-            color: #0066cc;
+            color: var(--file-link-color);
             text-decoration: none;
             font-family: 'Courier New', monospace;
         }
@@ -21,19 +39,19 @@
         }
 
         .duplicate-group {
-            border-left: 4px solid #007bff;
+            border-left: 4px solid var(--duplicate-group-border);
             padding-left: 15px;
             margin-bottom: 20px;
         }
 
         .size-duplicate-group {
-            border-left: 4px solid #ffc107;
+            border-left: 4px solid var(--size-duplicate-group-border);
             padding-left: 15px;
             margin-bottom: 20px;
         }
 
         .stats-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--stats-card-bg);
             color: white;
         }
 
@@ -43,15 +61,22 @@
 
         .file-path {
             font-size: 0.9em;
-            color: #666;
+            color: var(--file-path-color);
             word-break: break-all;
         }
 
         .group-header {
-            background-color: #f8f9fa;
+            background-color: var(--group-header-bg);
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 10px;
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
         }
     </style>
 </head>
@@ -63,6 +88,11 @@
                     <i class="bi bi-images"></i>
                     Duplicate Media Finder
                 </h1>
+
+                <!-- Dark Mode Toggle -->
+                <button id="darkModeToggle" class="btn btn-outline-secondary dark-mode-toggle">
+                    <i class="bi bi-moon"></i>
+                </button>
 
                 <!-- Configuration Form -->
                 <div class="card mb-4">
@@ -197,6 +227,9 @@
             const resultsSection = document.getElementById('resultsSection');
             const errorSection = document.getElementById('errorSection');
 
+            // Initialize dark mode
+            initializeDarkMode();
+
             // Load default values from config
             loadDefaults();
 
@@ -236,6 +269,37 @@
                 })
                 .catch(error => {
                     console.warn('Could not load defaults:', error.message);
+                });
+            }
+
+            // Initialize dark mode
+            function initializeDarkMode() {
+                const toggleButton = document.getElementById('darkModeToggle');
+                const html = document.documentElement;
+                const icon = toggleButton.querySelector('i');
+
+                // Load saved preference
+                const isDark = localStorage.getItem('darkMode') === 'true';
+                if (isDark) {
+                    html.setAttribute('data-bs-theme', 'dark');
+                    icon.className = 'bi bi-sun';
+                } else {
+                    html.removeAttribute('data-bs-theme');
+                    icon.className = 'bi bi-moon';
+                }
+
+                // Add event listener
+                toggleButton.addEventListener('click', function() {
+                    const isCurrentlyDark = html.getAttribute('data-bs-theme') === 'dark';
+                    if (isCurrentlyDark) {
+                        html.removeAttribute('data-bs-theme');
+                        icon.className = 'bi bi-moon';
+                        localStorage.setItem('darkMode', 'false');
+                    } else {
+                        html.setAttribute('data-bs-theme', 'dark');
+                        icon.className = 'bi bi-sun';
+                        localStorage.setItem('darkMode', 'true');
+                    }
                 });
             }
 
