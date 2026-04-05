@@ -174,7 +174,7 @@ class DuplicateImageDetector
     }
 
     /**
-     * Handle opening file in appropriate viewer (Xviewer for images, Celluloid for videos)
+     * Handle opening file in appropriate viewer (Xviewer for images, VLC for videos)
      */
     private function handleOpenFile(): array
     {
@@ -198,7 +198,7 @@ class DuplicateImageDetector
         // Get viewer settings from configuration
         $viewerConfig = $this->appConfig['viewers'] ?? [];
         $imageViewer = $viewerConfig['image_viewer'] ?? 'xviewer';
-        $videoViewer = $viewerConfig['video_viewer'] ?? 'celluloid';
+        $videoViewer = $viewerConfig['video_viewer'] ?? 'vlc';
         $videoExtensions = $viewerConfig['video_extensions'] ?? ['mp4'];
 
         // Determine file type and appropriate viewer

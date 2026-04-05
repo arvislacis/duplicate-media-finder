@@ -136,7 +136,7 @@ Edit `app_config.php` to customize which applications open image and video files
 ```php
 'viewers' => [
     'image_viewer' => 'xviewer',  // or 'eog', 'gwenview', 'gimp', etc.
-    'video_viewer' => 'celluloid', // or 'vlc', 'mpv', 'totem', etc.
+    'video_viewer' => 'vlc', // or 'celluloid', 'mpv', 'totem', etc.
     'video_extensions' => ['mp4']
 ],
 ```

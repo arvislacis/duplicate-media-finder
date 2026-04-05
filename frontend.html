@@ -443,7 +443,7 @@
                         html += '<a href="#" class="file-link" data-filepath="' + escapeHtml(file.filepath) + '">';
                         const isVideo = /\.(mp4|avi|mkv|mov|wmv|flv|webm)$/i.test(file.filepath);
                         if (isVideo) {
-                            html += '<i class="bi bi-film"></i> Open in Celluloid';
+                            html += '<i class="bi bi-film"></i> Open in VLC';
                         } else {
                             html += '<i class="bi bi-image"></i> Open in Xviewer';
                         }
@@ -540,7 +540,7 @@
                 });
             }
 
-            // Open file in appropriate viewer (Xviewer for images, Celluloid for videos)
+            // Open file in appropriate viewer (Xviewer for images, VLC for videos)
             function openInXviewer(filepath) {
                 const formData = new FormData();
                 formData.append('action', 'open_file');
